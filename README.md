@@ -1,14 +1,13 @@
 # sense-wallet
 
-Docker build:
+**Docker build:**
    ❯ docker build -t wallet .  
-Docker run:
+**Docker run:**
    ❯ docker run -p 8080:8080 wallet 
    
-Endpoints:
+**Endpoints:**
   Make transaction(POST):
   http://localhost:8080/transaction
-  
   {
 	"user_id": "134256",
 	"currency": "EUR",
