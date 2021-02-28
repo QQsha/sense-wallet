@@ -31,7 +31,7 @@ func NewWallet(store repository.StoreRepository, log *log.Logger) *Wallet {
 }
 
 func (wl Wallet) CreateTransaction(transaction models.Transaction) (models.Balance, error) {
-
+	// transtaction time check
 	if time.Until(transaction.Time) > 0 {
 		wl.log.Println("wrong time in transaction")
 		return models.Balance{}, futureDateError
@@ -42,11 +42,11 @@ func (wl Wallet) CreateTransaction(transaction models.Transaction) (models.Balan
 		wl.log.Println("cant get user balance")
 		return balance, err
 	}
-
+	// amount switch to negative
 	if transaction.Type == "withdrawal" {
 		transaction.Amount = decimals.NegativeAmount(transaction.Amount)
 	}
-
+	// right balance choice 
 	switch transaction.Currency {
 	case "EUR":
 		newBalance := decimals.NewBalance(balance.AmountEuro, transaction.Amount)

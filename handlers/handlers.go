@@ -35,13 +35,14 @@ func (u WalletHandler) CreateTransaction(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
+	// check if time have right format
 	transaction.Time, err = time.Parse("2-Jan-06 15:04:05", transaction.TimePlaced)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(fillResponse(400, err))
 		return
 	}
-
+	// input validate
 	validate := validator.New()
 	err = validate.Struct(transaction)
 	if err != nil {
@@ -49,6 +50,7 @@ func (u WalletHandler) CreateTransaction(w http.ResponseWriter, r *http.Request)
 		json.NewEncoder(w).Encode(fillResponse(400, err))
 		return
 	}
+	// make transaction
 	balance, err := u.use.CreateTransaction(transaction)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)

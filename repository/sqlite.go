@@ -2,7 +2,6 @@ package repository
 
 import (
 	"database/sql"
-	"fmt"
 
 	"github.com/QQsha/sense-wallet/models"
 )
@@ -56,7 +55,6 @@ func (s Store) ChangeBalanceEuro(userID string, amount float64) error {
 	}
 	_, err = tx.Stmt(exec).Exec(userID, amount, amount)
 	if err != nil {
-		fmt.Println("doing rollback")
 		tx.Rollback()
 		return err
 	}
@@ -80,7 +78,6 @@ func (s Store) ChangeBalanceUSD(userID string, amount float64) error {
 	}
 	_, err = tx.Stmt(exec).Exec(userID, amount, amount)
 	if err != nil {
-		fmt.Println("doing rollback")
 		tx.Rollback()
 		return err
 	}
