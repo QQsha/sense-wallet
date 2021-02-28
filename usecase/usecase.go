@@ -46,7 +46,7 @@ func (wl Wallet) CreateTransaction(transaction models.Transaction) (models.Balan
 	if transaction.Type == "withdrawal" {
 		transaction.Amount = decimals.NegativeAmount(transaction.Amount)
 	}
-	// right balance choice 
+	// right balance choice
 	switch transaction.Currency {
 	case "EUR":
 		newBalance := decimals.NewBalance(balance.AmountEuro, transaction.Amount)

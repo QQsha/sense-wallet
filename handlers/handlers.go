@@ -67,8 +67,8 @@ func (u WalletHandler) GetBalance(w http.ResponseWriter, r *http.Request) {
 
 	balance, err := u.use.GetBalance(userID)
 	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(fillResponse(500, err))
+		w.WriteHeader(http.StatusNotFound)
+		json.NewEncoder(w).Encode(fillResponse(404, err))
 		return
 	}
 	json.NewEncoder(w).Encode(balance)

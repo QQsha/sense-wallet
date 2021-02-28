@@ -35,8 +35,8 @@ func (s Store) CreateTransaction(transaction models.Transaction) error {
 
 func (s Store) GetBalance(userID string) (models.Balance, error) {
 	var balance models.Balance
-	err := s.db.QueryRow(`SELECT * FROM balance WHERE user_id=?`, userID).Scan(&balance.UserID, &balance.AmountEuro, &balance.AmountUSD)
-
+	balance.UserID = userID
+	err := s.db.QueryRow(`SELECT amount_euro, amount_usd FROM balance WHERE user_id=?`, userID).Scan(&balance.AmountEuro, &balance.AmountUSD)
 	return balance, err
 }
 
