@@ -9,6 +9,7 @@
 
   Make transaction(POST):
   http://localhost:8080/transaction
+  
   {
 	"user_id": "134256",
 	"currency": "EUR",
