@@ -6,6 +6,7 @@
    ❯ docker run -p 8080:8080 wallet 
    
 **Endpoints:**
+
   Make transaction(POST):
   http://localhost:8080/transaction
   {
